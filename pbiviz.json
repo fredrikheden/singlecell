@@ -1,8 +1,8 @@
 {
   "visual": {
-    "name": "testcell1",
-    "displayName": "testcell1",
-    "guid": "testcell1F3809C28F3FF40148F8285F9834834B5",
+    "name": "singlecell",
+    "displayName": "Single Cell",
+    "guid": "singlecellF3809C28F3FF40148F8285F9834834B5",
     "visualClassName": "Visual",
     "version": "1.0.0",
     "description": "",
