@@ -83,7 +83,18 @@ module powerbi.extensibility.visual {
 
                 } else {
                     // String value
-                    value = this.model.dataPoints[0].stringValue;
+                    if ( this.settings.dataPoint.forceFormatting ) {
+                        let iValueFormatter = valueFormatter.create({ format: this.settings.dataPoint.formatString, cultureSelector: this.settings.dataPoint.formatCulture  });
+                        if ( this.settings.dataPoint.forceFormattingSourceType === "DATE" ) {
+                            value = iValueFormatter.format( new Date(this.model.dataPoints[0].stringValue));
+                        } else if ( this.settings.dataPoint.forceFormattingSourceType === "NUMBER" ) {
+                            value = iValueFormatter.format( new Number(this.model.dataPoints[0].stringValue) );
+                        } else {
+                            value = iValueFormatter.format(this.model.dataPoints[0].stringValue);
+                        }
+                    } else {
+                        value = this.model.dataPoints[0].stringValue;
+                    }
                 }  
             }
 

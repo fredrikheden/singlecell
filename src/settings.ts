@@ -45,6 +45,8 @@ module powerbi.extensibility.visual {
       // Default culture
       public formatCulture: string = "";
       public forceThousandSeparatorCharacter: string = "";
+      public forceFormatting: boolean = false;
+      public forceFormattingSourceType: string = "STRING";
      }
 
 }

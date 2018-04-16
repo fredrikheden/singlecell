@@ -59,7 +59,33 @@
                     "type": {
                         "text":true
                     }
+                },
+                "forceFormatting": {
+                    "displayName": "Format Force",
+                    "type": {
+                        "bool":true
+                    }
+                },
+                "forceFormattingSourceType": {
+                    "displayName": "Source Type (if forced format)",
+                    "type": {
+                        "enumeration": [
+                        {
+                            "value": "NUMBER",
+                            "displayName": "Number"
+                        },
+                        {
+                            "value": "DATE",
+                            "displayName": "Date"
+                        },
+                        {
+                            "value": "STRING",
+                            "displayName": "String"
+                        }
+                        
+                    ]
                 }
+                           }
             }
         }
     },
