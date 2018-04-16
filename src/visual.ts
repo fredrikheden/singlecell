@@ -88,7 +88,8 @@ module powerbi.extensibility.visual {
                         if ( this.settings.dataPoint.forceFormattingSourceType === "DATE" ) {
                             value = iValueFormatter.format( new Date(this.model.dataPoints[0].stringValue));
                         } else if ( this.settings.dataPoint.forceFormattingSourceType === "NUMBER" ) {
-                            value = iValueFormatter.format( new Number(this.model.dataPoints[0].stringValue) );
+                            let  numValue = parseFloat( this.model.dataPoints[0].stringValue );
+                            value = iValueFormatter.format( numValue );
                         } else {
                             value = iValueFormatter.format(this.model.dataPoints[0].stringValue);
                         }
