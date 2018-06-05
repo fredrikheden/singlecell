@@ -14,14 +14,16 @@ module powerbi.extensibility.visual {
 
         var numberValue = null;
         var stringValue = "";
+        var noOfValues = 0;
         if ( dataViews && dataViews[0] && dataViews[0].categorical && dataViews[0].categorical.values && dataViews[0].categorical.values[0] && dataViews[0].categorical.values[0].values && dataViews[0].categorical.values[0].values[0] ) {           
             numberValue = dataViews[0].categorical.values[0].values[0];
+            noOfValues = 1;
         }
         if ( dataViews && dataViews[0] && dataViews[0].categorical && dataViews[0].categorical.categories && dataViews[0].categorical.categories[0] && dataViews[0].categorical.categories[0].values && dataViews[0].categorical.categories[0].values[0]) {
             stringValue = dataViews[0].categorical.categories[0].values[0].toString();
+            noOfValues = dataViews[0].categorical.categories[0].values.length;
         }
-        
-        
+
         if ( stringValue === "" && numberValue === null) {
             return viewModel;
         }
@@ -29,7 +31,8 @@ module powerbi.extensibility.visual {
         viewModel.dataPoints.push({
             numberValue: numberValue,
             stringValue: stringValue,
-            selectionId: null
+            selectionId: null,
+            noOfPoints: noOfValues
         });
 
         return viewModel;
@@ -48,6 +51,14 @@ module powerbi.extensibility.visual {
             this.host = options.host;
             this.selectionManager = options.host.createSelectionManager();
             let div = this.div = document.createElement("div");
+            var v = this;
+            this.div.addEventListener("click", () => {
+                if ( v.model.dataPoints !== undefined && v.model.dataPoints.length > 0) {
+                    if ( this.settings.dataPoint.treatAsLinkUrl ) {
+                        this.host.launchUrl(v.model.dataPoints[0].stringValue);
+                    }
+                }
+            });
             options.element.appendChild(div);
         }
 
@@ -96,10 +107,20 @@ module powerbi.extensibility.visual {
                     } else {
                         value = this.model.dataPoints[0].stringValue;
                     }
-                }  
+                }
             }
 
             this.div.innerHTML = this.settings.dataPoint.htmlTemplate.replace( "%VALUE%", value );
+
+            if ( this.settings.dataPoint.hideIfMoreThanOne ) {
+                if ( this.model.dataPoints.length > 0 && this.model.dataPoints[0].noOfPoints === 1) {
+                    this.div.style.display = "";
+                } else {
+                    this.div.style.display = "none";
+                }
+            } else {
+                this.div.style.display = "";            
+            }
         }
 
         private static parseSettings(dataView: DataView): VisualSettings {

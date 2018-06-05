@@ -47,6 +47,8 @@ module powerbi.extensibility.visual {
       public forceThousandSeparatorCharacter: string = "";
       public forceFormatting: boolean = false;
       public forceFormattingSourceType: string = "STRING";
+      public treatAsLinkUrl: boolean = false;
+      public hideIfMoreThanOne: boolean = false;
      }
 
 }

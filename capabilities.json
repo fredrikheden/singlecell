@@ -82,10 +82,21 @@
                             "value": "STRING",
                             "displayName": "String"
                         }
-                        
-                    ]
+                        ]
+                    }
+                },
+                "treatAsLinkUrl": {
+                    "displayName": "Treat as link",
+                    "type": {
+                        "bool":true
+                    }
+                },
+                "hideIfMoreThanOne": {
+                    "displayName": "Hide if many",
+                    "type": {
+                        "bool":true
+                    }
                 }
-                           }
             }
         }
     },

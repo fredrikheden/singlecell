@@ -9,6 +9,7 @@ module powerbi.extensibility.visual {
     stringValue: string;
     numberValue: number;
     selectionId: ISelectionId;
+    noOfPoints: number;
   };
 
 }
